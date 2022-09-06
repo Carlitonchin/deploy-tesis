@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 )
 
 func main() {
@@ -19,5 +21,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	router.Run(":8080")
+	port := os.Getenv("PORT")
+
+	router.Run(fmt.Sprintf(":%v", port))
 }
