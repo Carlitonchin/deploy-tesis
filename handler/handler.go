@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"net/http"
 	"time"
 
 	"github.com/Carlitonchin/Backend-Tesis/handler/middleware"
@@ -36,7 +37,12 @@ func NewHandler(c *Config) {
 		QuestionService: c.QuestionService,
 	}
 	timeouterror := apperrors.NewError(apperrors.TimeOut, "El request demoró mucho en procesarse")
+
 	c.R.Use(middleware.Timeout(c.TimeOut, timeouterror))
+
+	c.R.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{"hello": "World"})
+	})
 	account := c.R.Group("api/account")
 
 	account.POST("/signup", h.signUp)
