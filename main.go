@@ -2,18 +2,10 @@ package main
 
 import (
 	"log"
-
-	"github.com/joho/godotenv"
 )
 
 func main() {
 	log.Println("starting server ...")
-
-	err := godotenv.Load(".env")
-
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	data_source, err := init_db()
 
