@@ -34,14 +34,11 @@ func init_db() (*dataSource, error) {
 
 	redis_host := os.Getenv("REDISHOST")
 	redis_port := os.Getenv("REDISPORT")
-	redis_pass := os.Getenv("REDISPASSWORD")
-	redis_user := os.Getenv("REDISUSER")
 
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     fmt.Sprintf("%s:%s", redis_host, redis_port),
-		Password: redis_pass,
+		Password: "",
 		DB:       0,
-		Username: redis_user,
 	})
 
 	_, err = rdb.Ping(context.Background()).Result()
